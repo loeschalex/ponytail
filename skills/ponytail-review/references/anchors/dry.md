@@ -1,39 +1,73 @@
 # DRY (Don't Repeat Yourself)
 
-**Also known as:** DRY Principle. Antonym: WET ("Write Everything Twice" / "We Enjoy Typing").
-**Proponents:** Andy Hunt & Dave Thomas, *The Pragmatic Programmer* (1999)
+**Also known as:** DRY Principle; antonym: WET ("Write Everything Twice" / "We Enjoy Typing")
+**Key Proponents:** Andy Hunt & Dave Thomas, *The Pragmatic Programmer* (1999)
 
-## Core Concept
+## Core Concepts
 
-"Every piece of knowledge must have a single, unambiguous, authoritative
-representation within a system." DRY targets duplicated **knowledge/intent**,
-not coincidental textual similarity — two fragments that look alike but
-change for different reasons are not a DRY violation, and collapsing them
-couples unrelated concerns. Extract a shared abstraction after the
-**third** occurrence, not the first (Fowler's Rule of Three) — premature
-de-duplication guesses at an abstraction before the pattern is clear.
+**The principle** — "Every piece of knowledge must have a single,
+unambiguous, authoritative representation within a system." One fact — a
+business rule, a constant, a schema — lives in exactly one place.
+
+**Knowledge, not code** — DRY targets duplicated **knowledge/intent**, not
+coincidental textual similarity. Two code fragments that look alike but
+change for different reasons are not a DRY violation; collapsing them
+couples unrelated concerns.
+
+**Single source of truth** — derive rather than restate — generate
+docs/config/clients from one authoritative definition so a change
+propagates instead of being copied.
+
+**Rule of Three** — extract a shared abstraction after the **third**
+occurrence, not the first (Martin Fowler). Premature de-duplication
+guesses at an abstraction before the pattern is clear.
+
+**The wrong-abstraction caution** — "Duplication is far cheaper than the
+wrong abstraction" (Sandi Metz). A bad shared abstraction couples callers
+and is harder to unwind than the duplication it removed — prefer
+duplication until the right seam is obvious.
 
 ## When to Use
 
 - Consolidating a business rule, constant, or schema that appears in
-  several places into one authoritative definition
-- Designing a single source of truth (config, types, API contract) that
-  other artifacts derive from — see SSOT
-- Reviewing code where one conceptual change currently requires edits in
-  many unrelated spots
+  several places
+- Designing a single source of truth (config, types, API contracts) that
+  other artifacts derive from
+- Reviewing code for knowledge duplication that causes change to require
+  edits in many spots
 
 ## When NOT to Use
 
-- Before the third occurrence — resist abstracting on the first or second
-- When two similar-looking fragments change for different reasons — merging
-  them via a shared abstraction is worse than the duplication ("the wrong
-  abstraction," Sandi Metz, 2016)
-- As dogma over readability — a little duplication can beat a leaky,
+- Before the Rule of Three — resist abstracting on the first or second
+  occurrence
+- When two similar fragments change for different reasons — coupling them
+  via a shared abstraction is worse than the duplication
+- As dogma over readability: a little duplication can beat a leaky,
   over-general abstraction
-- The authors themselves say the principle is widely misread: in the 20th
-  Anniversary Edition (2019) they wrote code deduplication is "a tiny and
-  fairly trivial part" of DRY — it targets duplicated knowledge, not
-  duplicated syntax
+
+## Related Anchors
+
+- Single Source of Truth — the data-layer cousin of DRY's knowledge rule
+- Single Level of Abstraction Principle — keeps extracted abstractions
+  coherent
+- KISS Principle — the simplicity counterweight to over-abstraction
+- YAGNI — don't build the abstraction until you actually need it
+
+## Criticism
+
+- Sandi Metz, ["The Wrong Abstraction"](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction)
+  (2016) — overzealous DRY produces abstractions that later requirements
+  don't fit: "duplication is far cheaper than the wrong abstraction"; her
+  advice is to re-introduce the duplication until the right abstraction
+  reveals itself.
+- The authors themselves concede the principle is widely misread: in the
+  20th Anniversary Edition (2019), Thomas & Hunt write they "did a poor
+  job of explaining" DRY — it targets duplication of **knowledge and
+  intent**; code deduplication is "a tiny and fairly trivial part"
+  ([official chapter extract](https://media.pragprog.com/titles/tpp20/dry.pdf)).
+- The corollary both critiques share: two pieces of code that look alike
+  but encode different business knowledge are not a DRY violation —
+  merging them creates coupling, not clarity.
 
 ## Source
 

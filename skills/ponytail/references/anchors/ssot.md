@@ -1,33 +1,61 @@
 # SSOT (Single Source of Truth)
 
-**Also known as:** SSOT Principle
-**Related:** DRY (the knowledge-layer cousin), SPOT (Single Point of Truth — the implementation-pattern sibling; SSOT is the architecture/organizational-level version)
+## Core Concepts
 
-## Core Concept
+**Conceptual principle** — focuses on establishing trust and authority for
+data.
 
-One canonical, trusted location owns each piece of data or policy. Every
-consumer reads from — or derives from — that one source rather than keeping
-its own copy. The source is definitive when conflicts arise; other
-representations are derived from it, not independently maintained.
+**Authoritative source** — one canonical, trusted location for each piece
+of data.
+
+**Data integrity** — all consumers reference the same trusted source.
+
+**Version control** — a single source ensures consistent versioning.
+
+**Derived data** — other representations are derived from the single
+source.
+
+**Trust and reliability** — the source is the definitive version when
+conflicts arise.
+
+**System of record** — the primary data store for critical business
+information.
+
+**Organizational practice** — applied at the architecture and business
+process level.
+
+## Key Application Areas
+
+- Version control systems (Git as SSOT for code)
+- Database design and data warehousing
+- Documentation and knowledge management
+- Configuration management
+- Master data management (MDM)
 
 ## When to Use
 
-- Designing data or config architecture: one owner for a fact, others derive
-- Consolidating fallback order, normalization, or derivation logic that was
-  scattered across multiple call sites into one place
-- Resolving disagreement between multiple sources holding the "same" data
-- Establishing documentation or schema ownership so a change propagates
-  instead of being copied
+- Designing data architecture for enterprise systems
+- Establishing documentation standards and knowledge bases
+- Building data pipelines and ETL processes
+- Implementing microservices with clear data ownership
+- Creating audit trails and ensuring compliance
+- Resolving conflicts between multiple data sources
 
-## When NOT to Use
+## Difference from SPOT
 
-- Not license to merge unrelated concerns into one object because "it's all
-  config now." SSOT means one owner *per concern* — a single object that
-  also owns unrelated state is a different mistake (see Deep Modules'
-  "classitis"/SRP caveat), not a correct application of this principle.
-- Don't use SSOT to argue against a caller-visible interface (see Locality
-  of Behaviour) — the source can be centralized while still exposing a
-  transparent, boring lookup at the boundary.
+SSOT emphasizes the authoritative, trusted nature of a data source and is
+used at the architecture/organizational level, while SPOT (Single Point of
+Truth) focuses on the implementation pattern.
+
+## Related Concepts
+
+DRY, SPOT, Event sourcing, Data lakes, Master data management
+
+> **Note (not from source, written for this library):** SSOT means one
+> owner *per concern* — not license to merge unrelated concerns into one
+> object because "it's all config now." Nor does it argue against a
+> caller-visible interface (see Locality of Behaviour) — the source can be
+> centralized while the boundary stays transparent.
 
 ## Source
 
