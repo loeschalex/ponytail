@@ -21,6 +21,8 @@ Same as ponytail-review:
 - `native:` dependency or code doing what the platform already does. Name the feature.
 - `yagni:` abstraction with one implementation, config nobody sets, layer with one caller.
 - `shrink:` same logic, fewer lines. Show the shorter form.
+- `leaked:` a **Locality of Behaviour** violation — a caller must read elsewhere (a subclass, a hidden `__getitem__`, a side-effecting `__iter__`) to know what a call does. Complements, doesn't override, Deep Modules/SSOT. See `references/anchors/locality-of-behaviour.md`, `references/anchors/deep-modules.md`, `references/anchors/ssot.md`, `references/anchors/dry.md`.
+- `reach:` a **Law of Demeter** violation — a train-wreck chain (`a.getB().getC().doSomething()`) that reaches through an object to touch what it doesn't own. Not fluent builders or data-query DSLs, those chain by design. See `references/anchors/law-of-demeter.md`.
 
 ## Hunt
 

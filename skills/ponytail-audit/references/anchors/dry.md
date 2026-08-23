@@ -1,0 +1,1 @@
+../../../ponytail-review/references/anchors/dry.md

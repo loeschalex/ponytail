@@ -1,0 +1,1 @@
+../../../ponytail/references/anchors/ssot.md

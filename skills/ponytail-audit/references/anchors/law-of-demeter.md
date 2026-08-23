@@ -1,0 +1,1 @@
+../../../ponytail/references/anchors/law-of-demeter.md
